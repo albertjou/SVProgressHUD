@@ -75,5 +75,7 @@ typedef NS_ENUM(NSUInteger, SVProgressHUDMaskType) {
 
 + (BOOL)isVisible;
 
++ (void)setOverlayViewInsets:(UIEdgeInsets)insets;
+
 @end
 

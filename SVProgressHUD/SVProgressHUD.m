@@ -32,11 +32,13 @@ static UIImage *SVProgressHUDSuccessImage;
 static UIImage *SVProgressHUDErrorImage;
 static SVProgressHUDMaskType SVProgressHUDDefaultMaskType;
 static UIView *SVProgressHUDExtensionView;
+static UIEdgeInsets SVProgressHUDOverlayInsets = {0.0, 0.0, 0.0, 0.0};
 
 static const CGFloat SVProgressHUDRingRadius = 18;
 static const CGFloat SVProgressHUDRingNoTextRadius = 24;
 static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 static const CGFloat SVProgressHUDUndefinedProgress = -1;
+
 
 @interface SVProgressHUD ()
 
@@ -133,6 +135,11 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
 + (void)setViewForExtension:(UIView *)view{
     [self sharedView];
     SVProgressHUDExtensionView = view;
+}
+
++ (void)setOverlayViewInsets:(UIEdgeInsets)insets {
+    [self sharedView];
+    SVProgressHUDOverlayInsets = insets;
 }
 
 
@@ -648,7 +655,11 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
     }
     
     [self.overlayView setHidden:NO];
-    self.overlayView.backgroundColor = [UIColor clearColor];
+    self.overlayView.backgroundColor = [UIColor redColor];
+    
+    CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
+    self.overlayView.frame = UIEdgeInsetsInsetRect(bounds, SVProgressHUDOverlayInsets);
+    
     [self positionHUD:nil];
     
     if(self.alpha != 1 || self.hudView.alpha != 1) {
