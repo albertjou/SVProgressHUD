@@ -655,7 +655,7 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
     }
     
     [self.overlayView setHidden:NO];
-    self.overlayView.backgroundColor = [UIColor redColor];
+    self.overlayView.backgroundColor = [UIColor clearColor];
     
     CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
     self.overlayView.frame = UIEdgeInsetsInsetRect(bounds, SVProgressHUDOverlayInsets);
